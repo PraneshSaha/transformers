@@ -948,7 +948,8 @@ class Idefics3Model(Idefics3PreTrainedModel):
 
         past_seen_tokens = 0
         if use_cache:
-            past_seen_tokens = past_key_values.get_seq_length()
+            if past_key_values:
+                past_seen_tokens = past_key_values.get_seq_length()
 
         if inputs_embeds is not None and input_ids is None and past_seen_tokens == 0:
             raise ValueError("When first calling the model, if input_embeds are passed, input_ids should not be None.")
